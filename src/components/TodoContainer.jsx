@@ -13,29 +13,26 @@ const TodoContainer = ({ userSequence, addUserSequenceHandler }) => {
       id: nanoid() + new Date().getTime() + "#" + (userSequence + 1),
       title,
       date: new Date().getTime(),
-      status: 0
+      status: false
     }
-    setTodosList([newTodo, ...todosList])
+    setTodosList(prev => [newTodo, ...prev])
     addUserSequenceHandler()
   }
 
 
-  const deleteTodoHandler = (e) => {
-    const todoID = e.target.dataset.todoid;
-
+  const deleteTodoHandler = (todoID) => {
     const newTodos = todosList.filter(todo => todo.id !== todoID)
 
     setTodosList(newTodos)
   }
 
-  const doneTodoHandler = (e) => {
-    const { target } = e;
-    const todoID = target.dataset.todoid;
-
+  const doneTodoHandler = (todoID) => {
     const newTodos = todosList.map(todo => {
       if (todo.id === todoID) {
-        todo.status = (todo.status === 1) ? 0 : 1;
-
+        return {
+          ...todo,
+          status: (todo.status === true) ? false : true
+        }
       }
       return todo;
     })
@@ -43,23 +40,20 @@ const TodoContainer = ({ userSequence, addUserSequenceHandler }) => {
     setTodosList(newTodos)
   }
 
-  const updateTitleHandler = ({todoID, title}) => {
-    
+  const updateTitleHandler = ({ todoID, title }) => {
+
     const newTodos = todosList.map(todo => {
       if (todo.id === todoID) {
         todo.title = title
-        
+
       }
 
-      console.log(todo);
-      
       return todo
     })
 
     setTodosList(newTodos)
 
   }
-  
   return (
     <div className="todo-container bg-[#0d0d0d] mx-auto my-10 rounded-4xl py-8 px-28 max-w-[1440px]">
       <TodoHeader />

@@ -1,8 +1,6 @@
 const Tip = ({ todos }) => {
-  console.log(todos);
-  
-  const doneLengthTodos = todos.filter(todo => todo.status === 1) 
-  const undoneLengthTodos = todos.filter(todo => todo.status === 0)
+  const doneLengthTodos = todos.filter(todo => todo.status === true) 
+  const undoneLengthTodos = todos.filter(todo => todo.status === false)
 
   
   return (

@@ -4,8 +4,7 @@ import TodoContainer from "./components/TodoContainer";
 
 const App = () => {
   let [userSequence, setUserSequence] = useState(0);
-
-  const addUserSequenceHandler = () => setUserSequence(userSequence + 1)
+  const addUserSequenceHandler = () => setUserSequence(prev => prev + 1)
 
   return <TodoContainer userSequence={userSequence} addUserSequenceHandler={addUserSequenceHandler} />;
 };
