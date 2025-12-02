@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Tip from "./Tip";
 import TodoForm from "./TodoForm";
 import TodoHeader from "./TodoHeader";
 import TodoList from "./TodoList";
 import { nanoid } from "nanoid";
 const TodoContainer = ({ userSequence, addUserSequenceHandler }) => {
-  const [todosList, setTodosList] = useState([]);
+  const [todosList, setTodosList] = useState(() => {
+    return JSON.parse(localStorage.getItem("todos")) ?? []
+  });
+
+  useEffect(() => {
+    localStorage.setItem('todos',
+      JSON.stringify(todosList)
+
+    )
+  }, [todosList])
 
   const addTodoHandler = (title) => {
 
@@ -18,7 +27,6 @@ const TodoContainer = ({ userSequence, addUserSequenceHandler }) => {
     setTodosList(prev => [newTodo, ...prev])
     addUserSequenceHandler()
   }
-
 
   const deleteTodoHandler = (todoID) => {
     const newTodos = todosList.filter(todo => todo.id !== todoID)
@@ -36,6 +44,7 @@ const TodoContainer = ({ userSequence, addUserSequenceHandler }) => {
       }
       return todo;
     })
+
 
     setTodosList(newTodos)
   }
