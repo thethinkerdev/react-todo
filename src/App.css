@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech&display=swap");
+
+
+.my-bg-orange{
+  @apply bg-[#FF5730];
+}
+.my-border-orange{
+  @apply border-[#FF5730];
+}
+.center {
+  @apply mx-auto max-w-[700px];
+}
+body {
+  background-color: #cebea4;
+}
