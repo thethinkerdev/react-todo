@@ -8,7 +8,6 @@ import CheckMarkTodo from "../ui/CheckMarkTodo";
 import useTodos from "../../hooks/useTodos";
 
 const TodoItem = (todo: TodoType) => {
-
   const { updateTitleHandler } = useTodos();
 
   const [title, setTitle] = useState<string>(todo.title);
@@ -22,6 +21,8 @@ const TodoItem = (todo: TodoType) => {
     if (e.key == "Enter") {
       updateTitleHandler(todo.id, title);
       setEditMode(false);
+
+      
     }
   };
   return (

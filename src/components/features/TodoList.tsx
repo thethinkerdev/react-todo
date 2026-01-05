@@ -1,30 +1,22 @@
 import TodoItem from "./TodoItem";
-import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../../store";
 import type { TodoType } from "../../types";
 import { useEffect, useRef } from "react";
-import { loadTodos, saveTodos } from "../../utils/localStorageUtil";
-import { addListOfTodos } from "../../store/slices/TodoSlice";
+import { saveTodos } from "../../utils/localStorageUtil";
+import { useAppSelector } from "../../store/hooks/hooks";
 
 const TodoList = () => {
-const todosList = useSelector((state: RootState) => state.todo.list);
-  const dispatch = useDispatch();
-  
-const isFirstRender = useRef(true);
+  const todosList = useAppSelector((state) => state.todo.list);
 
-useEffect(() => {
-  const s = loadTodos();
-  dispatch(addListOfTodos({ todos: s }));
-}, []);
+  const isFirstRender = useRef(true);
 
-useEffect(() => {
-  if (isFirstRender.current) {
-    isFirstRender.current = false;
-    return;
-  }
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
 
-  saveTodos(todosList);
-}, [todosList]);
+    saveTodos(todosList);
+  }, [todosList]);
 
   return (
     <section className="center mt-10">

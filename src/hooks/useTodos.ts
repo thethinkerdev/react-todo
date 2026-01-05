@@ -1,5 +1,3 @@
-import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../store";
 import {
   addTodo,
   removeTodo,
@@ -7,12 +5,12 @@ import {
   updateTitleTodo,
 } from "../store/slices/TodoSlice";
 
+import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
+
 export default function useTodos() {
-  const dispatch = useDispatch();
-  const todosList = useSelector((state: RootState) => state.todo.list);
-  const userSequence = useSelector(
-    (state: RootState) => state.userSequence.count
-  );
+  const dispatch = useAppDispatch();
+  const todosList = useAppSelector((state) => state.todo.list);
+  const userSequence = useAppSelector((state) => state.userSequence.count);
 
   const addTodoHandler = (title: string) => {
     dispatch(

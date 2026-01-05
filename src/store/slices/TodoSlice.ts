@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { TodoType } from "../../types";
 import generateID from "../../utils/generateID";
-
-const initialState: { list: TodoType[] } = { list: [] };
+import { loadTodos } from "../../utils/localStorageUtil";
 
 const TodoSlice = createSlice({
   name: "todoSlice",
-  initialState,
+  initialState: {
+    list: loadTodos(),
+  },
   reducers: {
     addTodo: (state: { list: TodoType[] }, { payload }) => {
       const title: string = payload.title;
